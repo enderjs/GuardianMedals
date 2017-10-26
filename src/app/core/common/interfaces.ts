@@ -1054,6 +1054,12 @@ export interface ISearchResultOfDestinyEntitySearchResultItem {
     useTotalResults: boolean;
 }
 
+export interface ICharacterDataResponse {
+    character: ISingleComponentResponse<ComponentType>;
+    itemComponents: object;
+
+}
+
 /**
  * Interface for an sigle component
  * @interface

@@ -2,7 +2,7 @@
   <div flex-gt-sm="40">
     <mat-card class="grey">
       <mat-card-title>Overview</mat-card-title>
-      <mat-card-subtitle>Totals for your {{characterCount}} characters</mat-card-subtitle>
+      <mat-card-subtitle>Breakout for your {{characterCount}} characters</mat-card-subtitle>
       <mat-divider></mat-divider>
       <mat-card-content>
         <mat-list>
@@ -22,22 +22,10 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div flex-gt-sm="30">
+  <div flex-gt-sm="30" *ngFor="let characterData of characterData$ | async ">
     <mat-card class="grey">
-      <mat-card-title>Medals</mat-card-title>
-      <medals [medalsAccountResult]="medalsAccountResult"></medals>
-    </mat-card>
-  </div>
-  <div flex-gt-sm="30">
-    <mat-card class="grey">
-      <mat-card-title>Medals</mat-card-title>
-      <medals [medalsAccountResult]="medalsAccountResult"></medals>
-    </mat-card>
-  </div>
-  <div flex-gt-sm="30">
-    <mat-card class="grey">
-      <mat-card-title>Medals</mat-card-title>
-      <medals [medalsAccountResult]="medalsAccountResult"></medals>
+      <mat-card-title>{{characterData.classType}}</mat-card-title>
+      <!-- <medals [medalsAccountResult]="medalsAccountResult"></medals> -->
     </mat-card>
   </div>
 </div>

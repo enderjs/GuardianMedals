@@ -7,7 +7,7 @@ import { DESTINY2_API } from '../../../config/api.config';
 import { BungieMembershipType } from '../common/enums';
 import {
     IAPIResponse, IUserInfoCard, IDestinyHistoricalStatsAccountResult,
-    IDestinyHistoricalStatsDefinition, IDestinyCharacterComponent
+    IDestinyHistoricalStatsDefinition, IDestinyCharacterComponent, ICharacterDataResponse, IDestinyCharacterResponse
 } from '../common/interfaces';
 
 @Injectable()
@@ -74,11 +74,12 @@ export class HttpService {
     // https://www.bungie.net/Platform/Destiny2/2/Profile/4611686018433391683/Character/2305843009269462722 ?components=200
     public getCharacter(membershipId: string, membershipType: BungieMembershipType, characterId: string)
                                                                                 : Observable<IDestinyCharacterComponent> {
-        return this.http.get<IAPIResponse<IDestinyCharacterComponent>>
-            (`${DESTINY2_API}/${membershipType}/Profile/${membershipId}/Character`, {
+        return this.http.get<IAPIResponse<IDestinyCharacterResponse>>
+            (`${DESTINY2_API}/${membershipType}/Profile/${membershipId}/Character/${characterId}`, {
                 params: new HttpParams().set('components', '200'),
             }).map(result => {
-                return result.Response;
+                console.log(result.Response);
+                return result.Response.character.data;
             },
             (error: HttpErrorResponse) => {
                 if (error.error instanceof Error) {

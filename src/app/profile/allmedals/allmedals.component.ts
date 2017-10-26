@@ -26,6 +26,7 @@ export class AllmedalsComponent implements OnInit {
   ngOnInit() {
 
     this.medalsAccountResult = this.profileService.medalsAccountResult$.value;
+    console.log(this.medalsAccountResult);
     this.medalsData = this.medalsAccountResult.mergedAllCharacters.merged;
     this.characterCount = this.medalsAccountResult.characters.length;
     this.activitiesEntered = this.medalsData.allTime[StatId.ActivitiesEntered].basic.displayValue;

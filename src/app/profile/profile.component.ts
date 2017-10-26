@@ -53,12 +53,6 @@ export class ProfileComponent implements OnDestroy, OnInit {
       this.profileService.medalsAccountResult(data[1]);
       this.router.navigate(['./allmedals'], { relativeTo: this.route });
     });
-
-    // this.historicalStatsAccountResult$.subscribe(data => {
-    //   console.log(data);
-    //   this.profileService.medalsAccountResult(data);
-    //   this.router.navigate(['./medals'], { relativeTo: this.route });
-    // });
   }
 
   ngOnDestroy() {

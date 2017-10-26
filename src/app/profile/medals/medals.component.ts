@@ -44,7 +44,6 @@ export class MedalsComponent implements OnInit {
       return /\b(?!medalUnknown)\b\S+/.test(key);
     });
 
-    console.log(this.medalNames);
   }
 
   getKeys(json: Object): string[] {

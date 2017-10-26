@@ -22,13 +22,7 @@ const profileRoutes: Routes = [
             {
                 path: 'charactermedals',
                 component: CharactermedalsComponent
-            },
-            {
-                path: '',
-                component: MedalsComponent,
-                pathMatch: 'full'
             }
-
         ]
     }
 ];
