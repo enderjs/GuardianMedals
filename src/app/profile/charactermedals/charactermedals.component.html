@@ -1,0 +1,43 @@
+<div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
+  <div flex-gt-sm="40">
+    <mat-card class="grey">
+      <mat-card-title>Overview</mat-card-title>
+      <mat-card-subtitle>Totals for your {{characterCount}} characters</mat-card-subtitle>
+      <mat-divider></mat-divider>
+      <mat-card-content>
+        <mat-list>
+          <mat-list-item>
+            <h4 matLine>Activities Entered </h4>
+            <!-- <h3>{{activitiesEntered}}</h3> -->
+          </mat-list-item>
+          <mat-list-item>
+            <h4 matLine>Total Medals Earned </h4>
+            <!-- <h3>{{allMedalsEarned}}</h3> -->
+          </mat-list-item>
+          <mat-list-item>
+            <h4 matLine>Per Game Average </h4>
+            <!-- <h3>{{pga}}</h3> -->
+          </mat-list-item>
+        </mat-list>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div flex-gt-sm="30">
+    <mat-card class="grey">
+      <mat-card-title>Medals</mat-card-title>
+      <medals [medalsAccountResult]="medalsAccountResult"></medals>
+    </mat-card>
+  </div>
+  <div flex-gt-sm="30">
+    <mat-card class="grey">
+      <mat-card-title>Medals</mat-card-title>
+      <medals [medalsAccountResult]="medalsAccountResult"></medals>
+    </mat-card>
+  </div>
+  <div flex-gt-sm="30">
+    <mat-card class="grey">
+      <mat-card-title>Medals</mat-card-title>
+      <medals [medalsAccountResult]="medalsAccountResult"></medals>
+    </mat-card>
+  </div>
+</div>

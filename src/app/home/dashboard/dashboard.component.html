@@ -1,3 +1,36 @@
-<p>
-  dashboard works!
-</p>
+<div fxLayout="row" fxLayoutAlign="center center" class="pad-top-md pad-bottom-xl">
+  <h2 fxFlexAlign="center" class="logo md-display-2">Guardian Medals</h2>
+</div>
+
+<div class="width" [@tdFadeInOut]="apiErrored">
+  <td-message label="Error!" sublabel="The Bungie API is experiencing issues. Please try again." class="tc-grey-50 bgc-red-700" icon="error"></td-message>
+</div>
+
+<div class="width" [@tdFadeInOut]="noProfile">
+  <td-message label="No profile found for gamertag. Please try again." class="tc-grey-50 bgc-yellow-700" icon="info"></td-message>
+</div>
+
+<div class="width">
+  <mat-card class="grey">
+    <mat-card-content class="pad-bottom-none pull-bottom-none">
+      <form class="container" [formGroup]="options" [style.fontSize.px]="18">
+        <mat-form-field>
+          <input matInput placeholder="Gamertag" formControlName="gamertag" min="1" required>
+          <mat-error *ngIf="options.get('gamertag').invalid">Required</mat-error>
+        </mat-form-field>
+        <mat-form-field [color]="options.value.platform">
+          <mat-select placeholder="Platform" formControlName="platform">
+            <mat-option value="2">Playstation</mat-option>
+            <mat-option value="1">Xbox</mat-option>
+            <mat-option value="4">PC</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </form>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button [disabled]="options.pristine || options.invalid" (click)="search()" mat-raised-button color="primary" class="text-upper">Search</button>
+    </mat-card-actions>
+  </mat-card>
+ 
+</div>
