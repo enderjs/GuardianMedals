@@ -1,5 +1,5 @@
-<div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
-  <div flex-gt-sm="40">
+<div fxLayout.gt-sm="row" fxLayout.xs="column" fxLayout.sm="column">
+  <div fxFlex.gt-sm="40">
     <mat-card class="grey">
       <mat-card-title>Overview</mat-card-title>
       <mat-card-subtitle>Totals for your {{characterCount}} characters</mat-card-subtitle>
@@ -22,7 +22,7 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div flex-gt-sm="60">
+  <div fxFlex.gt-sm="60">
     <mat-card class="grey">
       <mat-card-title>Medals</mat-card-title>
       <medals [medalsAccountResult]="medalsAccountResult"></medals>

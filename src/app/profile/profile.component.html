@@ -6,14 +6,14 @@
 
   <nav mat-tab-nav-bar backgroundColor="primary" class="text-upper">
     <a mat-tab-link routerLink="allmedals" routerLinkActive #rla1="routerLinkActive" [active]="rla1.isActive">
-      <span hide-xs>Medals</span>
-      <span hide-gt-xs>
+      <span fxHide.xs>All</span>
+      <span fxHide.gt-xs>
         <mat-icon>all_inclusive</mat-icon>
       </span>
     </a>
     <a mat-tab-link routerLink="charactermedals" routerLinkActive #rla2="routerLinkActive" [active]="rla2.isActive">
-      <span hide-xs>Medals by Character</span>
-      <span hide-gt-xs>
+      <span fxHide.xs>By Character</span>
+      <span fxHide.gt-xs>
         <mat-icon>accessibility</mat-icon>
       </span>
     </a>

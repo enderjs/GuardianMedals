@@ -1,0 +1,48 @@
+.grey {
+    background-color: #f3f3f3;
+  }
+
+  .greyText {
+    color: #f3f3f3;
+  }
+
+  .classRace {
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+  }
+
+  .light {
+    //position: absolute;
+    //top: 10px;
+    //right: 5px;
+    font-weight: 700;
+    color: #f5dc56;
+    //text-align: right;
+  }
+  .light::before {
+    content: "\2726";
+    display: inline-block;
+    vertical-align: 22%;
+    font-size: 50%;
+  }
+
+.over {
+  position: absolute;
+  top: 25px;
+  left: 100px;
+  font-weight: 700;
+  font-size: 20px;
+  color: white;
+  text-align: left;
+}
+
+.overRight {
+  position: absolute;
+  top: 0;
+  right: 50%;
+  font-size: 20px;
+  color: white;
+  text-align: right;
+}

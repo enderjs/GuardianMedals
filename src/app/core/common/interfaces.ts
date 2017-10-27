@@ -140,11 +140,19 @@ export interface IDestinyCharacterComponent {
     classType: DestinyClass;
     genderType: DestinyGender;
     emblemPath: string;
-    emplemBackgroundPath: string;
+    emblemBackgroundPath: string;
+    emblemColor: IEmblemColor;
     emblemHash: number;
     levelProgression: IDestinyProgression;
     baseCharacterLevel: number;
     percentToNextLevel: number;
+}
+
+export interface IEmblemColor {
+    alpha: number;
+    blue: number;
+    green: number;
+    red: number;
 }
 
 /**

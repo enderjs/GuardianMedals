@@ -78,7 +78,6 @@ export class HttpService {
             (`${DESTINY2_API}/${membershipType}/Profile/${membershipId}/Character/${characterId}`, {
                 params: new HttpParams().set('components', '200'),
             }).map(result => {
-                console.log(result.Response);
                 return result.Response.character.data;
             },
             (error: HttpErrorResponse) => {

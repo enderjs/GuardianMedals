@@ -1,31 +1,76 @@
-<div layout-gt-sm="row" tdMediaToggle="gt-xs" [mediaClasses]="['push-sm']">
-  <div flex-gt-sm="40">
+<div fxLayout.gt-sm="row" fxLayout.xs="column" fxLayout.sm="column">
+  <div fxFlex="40%">
+    <div fxLayout="row" fxLayoutWrap fxLayout.xs="column" *tdLoading="let characterData until characterData$ | async; type: 'circular'; color:'primary' ">
+      <mat-card class="width" class="grey" *ngFor="let character of characterData">
+        <mat-card-title-group [style.background]="getBackgroundColor(character)">
+          <img mat-card-image src={{getEmblemBackgroundPath(character)}}>
+          <mat-card-title class="overRight">{{getClassRace(character)}}</mat-card-title>
+          <!-- {{info.light}} -->
+        </mat-card-title-group>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <mat-list>
+            <mat-list-item>
+              <h4 matLine>Activities Entered </h4>
+              <!-- <h3>{{activitiesEntered}}</h3> -->
+            </mat-list-item>
+            <mat-list-item>
+              <h4 matLine>Total Medals Earned </h4>
+              <!-- <h3>{{allMedalsEarned}}</h3> -->
+            </mat-list-item>
+            <mat-list-item>
+              <h4 matLine>Per Game Average </h4>
+              <!-- <h3>{{pga}}</h3> -->
+            </mat-list-item>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <!-- <div fxFlex="40%">
     <mat-card class="grey">
-      <mat-card-title>Overview</mat-card-title>
-      <mat-card-subtitle>Breakout for your {{characterCount}} characters</mat-card-subtitle>
+      <mat-card-title-group>
+        <img mat-card-md-image src={{getEmblemPath(character)}}>
+        <mat-card-title class="greyText">{{getClassRace(character)}}</mat-card-title>
+      </mat-card-title-group>
       <mat-divider></mat-divider>
       <mat-card-content>
         <mat-list>
           <mat-list-item>
             <h4 matLine>Activities Entered </h4>
-            <!-- <h3>{{activitiesEntered}}</h3> -->
+            <h3>{{activitiesEntered}}</h3>
           </mat-list-item>
           <mat-list-item>
             <h4 matLine>Total Medals Earned </h4>
-            <!-- <h3>{{allMedalsEarned}}</h3> -->
+            <h3>{{allMedalsEarned}}</h3>
           </mat-list-item>
           <mat-list-item>
             <h4 matLine>Per Game Average </h4>
-            <!-- <h3>{{pga}}</h3> -->
+            <h3>{{pga}}</h3>
           </mat-list-item>
         </mat-list>
       </mat-card-content>
     </mat-card>
+  </div> -->
+  <div fxFlex="60%">
+    <div fxLayout="row" fxLayoutWrap fxLayout.xs="column" *tdLoading="let characterData until characterData$ | async; type: 'circular'; color:'primary' ">
+      <mat-card class="width" class="grey" *ngFor="let character of characterData">
+        <mat-card-title-group [style.background]="getBackgroundColor(character)">
+          <img mat-card-lg-image src={{getEmblemPath(character)}}>
+          <mat-card-title class="greyText">{{getClassRace(character)}}</mat-card-title>
+          <mat-card-subtitle class="light">{{character.light}}</mat-card-subtitle>
+          <!-- {{info.light}} -->
+        </mat-card-title-group>
+        <medals [medalsAccountResult]="medalsAccountResult"></medals>
+      </mat-card>
+    </div>
   </div>
-  <div flex-gt-sm="30" *ngFor="let characterData of characterData$ | async ">
+
+
+  <!-- <div flex-gt-sm="30" *ngFor="let characterData of characterData$ | async ">
     <mat-card class="grey">
       <mat-card-title>{{characterData.classType}}</mat-card-title>
-      <!-- <medals [medalsAccountResult]="medalsAccountResult"></medals> -->
+      <medals [medalsAccountResult]="medalsAccountResult"></medals>
     </mat-card>
-  </div>
+  </div> -->
 </div>
