@@ -16,14 +16,14 @@ import { DESTINY2_BASE } from '../../../config/api.config';
 
 
 export interface ICharacterData {
-  medalData: IDestinyHistoricalStatsAccountResult;
+  medalData: IDestinyHistoricalStatsByPeriod;
   profileData: IDestinyCharacterComponent;
 }
 
-export class CharacterData {
-  medalData: IDestinyHistoricalStatsAccountResult;
+export class CharacterData implements ICharacterData {
+  medalData: IDestinyHistoricalStatsByPeriod;
   profileData: IDestinyCharacterComponent;
-  constructor(medalData: IDestinyHistoricalStatsAccountResult, profileData: IDestinyCharacterComponent) {
+  constructor(medalData: IDestinyHistoricalStatsByPeriod, profileData: IDestinyCharacterComponent) {
     this.medalData = medalData;
     this.profileData = profileData;
   }
@@ -40,11 +40,12 @@ export class CharactermedalsComponent implements OnInit {
   membershipId: string;
   membershipType: BungieMembershipType;
   medalsAccountResult: IDestinyHistoricalStatsAccountResult;
+  characterMedalsData: IDestinyHistoricalStatsByPeriod;
   characters: IDestinyHistoricalStatsPerCharacter[];
-  characterIds: string[] = [];
+  charactersId: string[] = [];
   characterCount: number;
-  characterData$: Observable<IDestinyCharacterComponent[]>;
-  characterData: ICharacterData[] = [];
+  charactersProfile$: Observable<IDestinyCharacterComponent[]>;
+  charactersData: ICharacterData[] = [];
 
   constructor(private http: HttpService, private sanitizer: DomSanitizer, private loading: TdLoadingService, private route: ActivatedRoute,
     private profileService: ProfileService) {
@@ -58,28 +59,42 @@ export class CharactermedalsComponent implements OnInit {
     this.medalsAccountResult = this.profileService.medalsAccountResult$.value;
     this.characters = this.medalsAccountResult.characters;
     this.characters.forEach(Character => {
-      this.characterIds.push(Character.characterId);
+      this.charactersId.push(Character.characterId);
     });
 
-    this.characterData$ = this.retrieveAllCharacters(this.characterIds);
-    this.characterData$.subscribe(characters => {
+    this.charactersProfile$ = this.retrieveAllCharacterProfiles(this.charactersId);
+    this.charactersProfile$.subscribe(characters => {
       characters.forEach(character => {
-        const characterCombined = new CharacterData(this.medalsAccountResult, character);
-        this.characterData.push(characterCombined);
+        const medals = this.medalsAccountResult.characters
+          .filter(characterMedals => characterMedals.characterId === character.characterId)[0].merged;
+        const characterDataCombined = new CharacterData(medals, character);
+        this.charactersData.push(characterDataCombined);
       });
     });
 
-    console.log(this.characterData);
+    console.log(this.charactersData);
   }
 
-  retrieveAllCharacters(characters: string[]): Observable<IDestinyCharacterComponent[]> {
-    const singleObservables = characters.map((characterId: string, urlIndex: number) => {
+  retrieveAllCharacterProfiles(charactersIds: string[]): Observable<IDestinyCharacterComponent[]> {
+    const singleObservables = charactersIds.map((characterId: string, urlIndex: number) => {
       return this.http.getCharacter(this.membershipId, this.membershipType, characterId)
         .map(result => result as IDestinyCharacterComponent);
 
     });
 
     return Observable.forkJoin(singleObservables);
+  }
+
+  getActivitiesEntered(characterMedals: IDestinyHistoricalStatsByPeriod): string {
+    return characterMedals.allTime[StatId.ActivitiesEntered].basic.displayValue;
+  }
+
+  getMedalsCount(characterMedals: IDestinyHistoricalStatsByPeriod): string {
+    return characterMedals.allTime[StatId.AllMedalsEarned].basic.displayValue;
+  }
+
+  getMedalsPga(characterMedals: IDestinyHistoricalStatsByPeriod): string {
+    return characterMedals.allTime[StatId.AllMedalsEarned].pga.displayValue;
   }
 
   getEmblemPath(character: IDestinyCharacterComponent): string {
@@ -136,14 +151,5 @@ export class CharactermedalsComponent implements OnInit {
 
 
   }
-
-  // getClassList(): Array<{key: string, value: string}> {
-  //   const classArray = [];
-  //   const classes = DestinyClass;
-  //   for (let key in classes) {
-  //     if (classes.)
-  //   }
-
-  // }
 
 }

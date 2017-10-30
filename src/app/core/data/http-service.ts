@@ -17,7 +17,7 @@ export class HttpService {
 
     public searchUser(gamertag: string, membershipType: BungieMembershipType): Observable<IUserInfoCard> {
 
-        return this.http.get<IAPIResponse<IUserInfoCard>>(`${DESTINY2_API}/SearchDestinyPlayer/${membershipType}/${gamertag}`)
+        return this.http.get<IAPIResponse<IUserInfoCard>>(`${DESTINY2_API}/SearchDestinyPlayer/${membershipType}/${gamertag}/`)
             .map(result => {
                 return result.Response[0];
             },
@@ -36,7 +36,7 @@ export class HttpService {
     // https://www.bungie.net/Platform/Destiny2/2/Account/4611686018433391683/Stats/?groups=3
     public getMedals(membershipId: string, membershipType: BungieMembershipType): Observable<IDestinyHistoricalStatsAccountResult> {
         return this.http.get<IAPIResponse<IDestinyHistoricalStatsAccountResult>>
-            (`${DESTINY2_API}/${membershipType}/Account/${membershipId}/Stats`, {
+            (`${DESTINY2_API}/${membershipType}/Account/${membershipId}/Stats/`, {
                 params: new HttpParams().set('groups', '3'),
             }).map(result => {
                 return result.Response;
@@ -55,7 +55,7 @@ export class HttpService {
 
     public getHistoricalStatsDefinition(): Observable<IDestinyHistoricalStatsDefinition> {
         return this.http.get<IAPIResponse<IDestinyHistoricalStatsDefinition>>
-            (`${DESTINY2_API}/Stats/Definition`).map(result => {
+            (`${DESTINY2_API}/Stats/Definition/`).map(result => {
                 return result.Response;
             }
             ,
@@ -75,7 +75,7 @@ export class HttpService {
     public getCharacter(membershipId: string, membershipType: BungieMembershipType, characterId: string)
                                                                                 : Observable<IDestinyCharacterComponent> {
         return this.http.get<IAPIResponse<IDestinyCharacterResponse>>
-            (`${DESTINY2_API}/${membershipType}/Profile/${membershipId}/Character/${characterId}`, {
+            (`${DESTINY2_API}/${membershipType}/Profile/${membershipId}/Character/${characterId}/`, {
                 params: new HttpParams().set('components', '200'),
             }).map(result => {
                 return result.Response.character.data;

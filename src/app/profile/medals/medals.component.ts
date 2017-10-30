@@ -13,10 +13,10 @@ import { StatId } from '../../core/common/enums';
 })
 export class MedalsComponent implements OnInit {
 
-  @Input() medalsAccountResult: IDestinyHistoricalStatsAccountResult;
+  @Input() medalsData: IDestinyHistoricalStatsByPeriod;
 
   // medalsAccountResult: IDestinyHistoricalStatsAccountResult;
-  medalsData: IDestinyHistoricalStatsByPeriod;
+  // medalsData: IDestinyHistoricalStatsByPeriod;
   activitiesEntered: string;
   statsDefinition: IDestinyHistoricalStatsDefinition;
   allMedalsEarned: string;
@@ -29,11 +29,11 @@ export class MedalsComponent implements OnInit {
   ngOnInit() {
 
     this.statsDefinition = this.profileService.historicalStatsDefinition$.value;
-    this.medalsData = this.medalsAccountResult.mergedAllCharacters.merged;
-    this.characterCount = this.medalsAccountResult.characters.length;
-    this.activitiesEntered = this.medalsData.allTime[StatId.ActivitiesEntered].basic.displayValue;
-    this.allMedalsEarned = this.medalsData.allTime[StatId.AllMedalsEarned].basic.displayValue;
-    this.pga = this.medalsData.allTime[StatId.AllMedalsEarned].pga.displayValue;
+    // this.medalsData = this.medalsAccountResult.mergedAllCharacters.merged;
+    // this.characterCount = this.medalsAccountResult.characters.length;
+    // this.activitiesEntered = this.medalsData.allTime[StatId.ActivitiesEntered].basic.displayValue;
+    // this.allMedalsEarned = this.medalsData.allTime[StatId.AllMedalsEarned].basic.displayValue;
+    // this.pga = this.medalsData.allTime[StatId.AllMedalsEarned].pga.displayValue;
 
     this.medalNames = this.getKeys(this.medalsData.allTime);
     this.medalNames = this.medalNames.filter(key => {
