@@ -1,9 +1,9 @@
 <div fxLayout="row" fxLayoutWrap>
-  <mat-list fxFlex="33%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let medalName of medalNames">
+  <mat-list fxFlex="33%" fxFlex.md="50%" fxFlex.sm="50%" fxFlex.xs="100%" *ngFor="let medal of medals">
     <mat-list-item>
-      <img matListAvatar [src]="getIconPath(medalName)">
-      <h4 matLine>{{getDisplayName(medalName)}}</h4>
-      <p matLine>{{medalsData.allTime[medalName].basic.displayValue}}</p>
+      <img matListAvatar [src]="getIconPath(medal.name)">
+      <h4 matLine>{{getDisplayName(medal.name)}}</h4>
+      <p matLine>{{medalsData.allTime[medal.name].basic.displayValue}}</p>
     </mat-list-item>
   </mat-list>
 </div>

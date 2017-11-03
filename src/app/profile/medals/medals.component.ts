@@ -6,6 +6,16 @@ import {
 } from '../../core/common/interfaces';
 import { StatId } from '../../core/common/enums';
 
+export class Medal {
+  name: string;
+  value: number;
+
+  constructor(name: string, value: number) {
+    this.name = name;
+    this.value = value;
+  }
+}
+
 @Component({
   selector: 'medals',
   templateUrl: './medals.component.html',
@@ -21,6 +31,7 @@ export class MedalsComponent implements OnInit {
   statsDefinition: IDestinyHistoricalStatsDefinition;
   allMedalsEarned: string;
   medalNames: string[] = [];
+  medals: Medal[] = [];
   characterCount: number;
   pga: string;
 
@@ -43,6 +54,18 @@ export class MedalsComponent implements OnInit {
     this.medalNames = this.medalNames.filter(key => {
       return /\b(?!medalUnknown)\b\S+/.test(key);
     });
+
+    this.medalNames.forEach(medalName => {
+      const value = this.medalsData.allTime[medalName].basic.value;
+      const medal = new Medal(medalName, value);
+      this.medals.push(medal);
+    });
+
+    this.medals.sort((a: Medal, b: Medal) => {
+      return b.value - a.value;
+    });
+
+    console.log(this.medals);
 
   }
 

@@ -59,12 +59,16 @@ export class CharactermedalsComponent implements OnInit {
     this.medalsAccountResult = this.profileService.medalsAccountResult$.value;
     this.characters = this.medalsAccountResult.characters;
     this.characters.forEach(Character => {
-      this.charactersId.push(Character.characterId);
+      if (!Character.deleted) {
+        this.charactersId.push(Character.characterId);
+      }
     });
 
     this.charactersProfile$ = this.retrieveAllCharacterProfiles(this.charactersId);
     this.charactersProfile$.subscribe(characters => {
       characters.forEach(character => {
+
+
         const medals = this.medalsAccountResult.characters
           .filter(characterMedals => characterMedals.characterId === character.characterId)[0].merged;
         const characterDataCombined = new CharacterData(medals, character);
@@ -90,11 +94,19 @@ export class CharactermedalsComponent implements OnInit {
   }
 
   getMedalsCount(characterMedals: IDestinyHistoricalStatsByPeriod): string {
-    return characterMedals.allTime[StatId.AllMedalsEarned].basic.displayValue;
+    if (characterMedals.allTime[StatId.AllMedalsEarned]) {
+      return characterMedals.allTime[StatId.AllMedalsEarned].basic.displayValue;
+    } else {
+      return '0';
+    }
   }
 
   getMedalsPga(characterMedals: IDestinyHistoricalStatsByPeriod): string {
-    return characterMedals.allTime[StatId.AllMedalsEarned].pga.displayValue;
+    if (characterMedals.allTime[StatId.AllMedalsEarned]) {
+      return characterMedals.allTime[StatId.AllMedalsEarned].pga.displayValue;
+    } else {
+      return '0';
+    }
   }
 
   getEmblemPath(character: IDestinyCharacterComponent): string {
